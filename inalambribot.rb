@@ -21,7 +21,7 @@ Telegram::Bot::Client.run(token) do |bot|
       when '/start'
         user_info = bot.api.get_chat_member(chat_id: ENV['ESC_GROUP_ID'], user_id: message.chat.id)
         if !["left", "kicked"].include?(user_info.status)
-          username = message.chat.username.nil? ? "(#{message.chat.id}) #{message.from.first_name}" : message.chat.username
+          username = message.chat.username.nil? ? message.chat.id : message.chat.username
           password = nil
           credentials.each do |curcred|
             if curcred["User Role"] == username or curcred["User Role"].nil?
