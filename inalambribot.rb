@@ -24,7 +24,11 @@ Telegram::Bot::Client.run(token) do |bot|
           username = message.chat.username.nil? ? message.chat.id : message.chat.username
           password = nil
           credentials.each do |curcred|
-            if curcred["User Role"] == username or curcred["User Role"].nil?
+            if curcred["User Role"] == username 
+              password = curcred["Passphrase"]
+              break
+            end
+            if curcred["User Role"].nil?
               if curcred["VLAN ID"].to_i < 200
                 password = curcred["Passphrase"]
                 curcred["User Role"] = username
@@ -34,6 +38,7 @@ Telegram::Bot::Client.run(token) do |bot|
                     csv << credential
                   end
                 end
+                FileUtils.cp "csv/esc_wifi_new.csv", "csv/esc_wifi_#{username}.csv"
                 FileUtils.mv "csv/esc_wifi_new.csv", "csv/esc_wifi.csv"
                 break
               end
