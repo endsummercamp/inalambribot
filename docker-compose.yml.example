@@ -1,0 +1,9 @@
+services:
+  inalambribot:
+    image: inalambribot
+    environment:
+      BOT_TOKEN: "PUT_YOUR_TOKEN_HERE"
+      ESC_GROUP_ID: "@username or GROUP_ID"
+    volumes:
+      - ./csv:/usr/src/app/csv:rw
+    restart: unless-stopped
