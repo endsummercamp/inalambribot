@@ -20,7 +20,7 @@ Telegram::Bot::Client.run(token) do |bot|
       case message.text
       when '/start'
         user_info = bot.api.get_chat_member(chat_id: ENV['ESC_GROUP_ID'], user_id: message.chat.id)
-        if !["left", "kicked", "restricted"].include?(user_info.status)
+        if !["left", "kicked"].include?(user_info.status)
           username = message.chat.username.nil? ? "(#{message.chat.id}) #{message.from.first_name}" : message.chat.username
           password = nil
           credentials.each do |curcred|
