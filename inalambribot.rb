@@ -44,7 +44,7 @@ Telegram::Bot::Client.run(token) do |bot|
               end
             end
           end
-          bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name}\nBenvenuto all'ESC!\nQuesta è la tua password del wireless: #{password}")
+          bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name}\nBenvenuto all'ESC!\nQuesta è la tua password del wireless: `#{password}`", parse_mode: 'Markdown')
         else
           bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name}.\nSfortunatamente non sei membro del gruppo o sei stat* bannat*, per cui non puoi ottenere una password del WiFi.")
         end
