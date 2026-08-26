@@ -54,7 +54,7 @@ Telegram::Bot::Client.run(token) do |bot|
           username = message.chat.username.nil? ? message.chat.id.to_s : message.chat.username
           password = assign_password(username)
           if password
-            bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name}\nBenvenuto all'ESC!\nQuesta è la tua password del wireless: `#{password}`", parse_mode: 'Markdown')
+            bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name.sub('_', '\_')}\nBenvenuto all'ESC!\nQuesta è la tua password del wireless: `#{password}`", parse_mode: 'Markdown')
           else
             bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name}.\nMi spiace, al momento non ci sono più password disponibili.")
           end
