@@ -1,8 +1,7 @@
 # Inalambribot (aka esc-wifi-bot)
 
 - `git clone thisrepo`
-- `docker build -t inalambribot .`
-- edit compose
-- `docker-compose up -d`
+- edit compose example
+- `docker-compose up -d (--build)`
 
 cheers
