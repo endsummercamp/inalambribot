@@ -1,6 +1,7 @@
 services:
   inalambribot:
-    image: inalambribot
+    # image: inalambribot
+    build: .
     environment:
       BOT_TOKEN: "PUT_YOUR_TOKEN_HERE"
       ESC_GROUP_ID: "@username or GROUP_ID"
