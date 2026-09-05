@@ -16,6 +16,10 @@ def sanitize_username(username)
   username.to_s.gsub(/[^A-Za-z0-9_-]/, '_')
 end
 
+def escape_markdown(text)
+  text.to_s.gsub(/([_*`\[])/, '\\\\\1')
+end
+
 def assign_password(username)
   File.open(LOCK_PATH, File::CREAT | File::RDWR) do |lock|
     lock.flock(File::LOCK_EX)
@@ -54,7 +58,7 @@ Telegram::Bot::Client.run(token) do |bot|
           username = message.chat.username.nil? ? message.chat.id.to_s : message.chat.username
           password = assign_password(username)
           if password
-            bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name.sub('_', '\_')}\nBenvenuto all'ESC!\nQuesta è la tua password del wireless: `#{password}`", parse_mode: 'Markdown')
+            bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{escape_markdown(message.from.first_name)}\nBenvenuto all'ESC!\nQuesta è la tua password del wireless: `#{password}`", parse_mode: 'Markdown')
           else
             bot.api.send_message(chat_id: message.chat.id, text: "Ciao, #{message.from.first_name}.\nMi spiace, al momento non ci sono più password disponibili.")
           end
